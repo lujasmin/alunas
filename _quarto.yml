@@ -1,0 +1,37 @@
+project:
+  type: website
+
+website:
+  title: "Women in STEM"
+  sidebar:
+    style: "docked"
+    background: info
+    tools:
+      - icon: github
+        href: https://github.com/lucaslopes/alunas
+    contents:
+      - href: sections/introduction.ipynb
+      - sections/related.ipynb
+      - section: "Materiais e Métodos"
+        contents:
+          - sections/data_raw.ipynb
+          - sections/data_collect.ipynb
+          - sections/data_inpect.qmd
+          - sections/data_clean.ipynb
+      - section: "Datasets curados e enriquecidos com metadados de proveniência"
+        contents:
+          - sections/data_dict.qmd
+          - sections/data_aux.qmd
+          - sections/data_provenance.qmd
+          - sections/data_fair.qmd
+      - sections/conclusion.qmd
+
+format:
+  html:
+    page-layout: full
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
