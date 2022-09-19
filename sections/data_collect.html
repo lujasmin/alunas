@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Women in STEM – data_collect</title>
+<title>Women in STEM - Data Collect</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -135,7 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">(Untitled)</h1>
+      <h1 class="quarto-secondary-nav-title">Data Collect</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -181,12 +181,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../sections/data_raw.html" class="sidebar-item-text sidebar-link">Dataset bruto</a>
+  <a href="../sections/data_raw.html" class="sidebar-item-text sidebar-link">Raw Data</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../sections/data_collect.html" class="sidebar-item-text sidebar-link active">Aquisição dos dados brutos</a>
+  <a href="../sections/data_collect.html" class="sidebar-item-text sidebar-link active">Data Collect</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -256,7 +256,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- main -->
 <main class="content column-body" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Data Collect</h1>
+</div>
 
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
 
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -332,7 +346,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_datasets(from_year, to_year, columns):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  dfs <span class="op">=</span> <span class="bu">list</span>()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(from_year, to_year):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(from_year, to_year <span class="op">+</span> <span class="dv">1</span>):</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    path_table <span class="op">=</span> get_path_table_by_year(y)</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    dataset <span class="op">=</span> dt.fread(path_table, columns<span class="op">=</span>columns)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    df_filter <span class="op">=</span> filter_dataset(dataset)</span>
@@ -580,8 +594,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>...</td>
     </tr>
     <tr>
-      <th>41327</th>
-      <td>2018</td>
+      <th>48779</th>
+      <td>2019</td>
       <td>Centro-Oeste</td>
       <td>DF</td>
       <td>5300108.0</td>
@@ -593,71 +607,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>2</td>
       <td>3.0</td>
       <td>1</td>
-      <td>25</td>
-      <td>11</td>
+      <td>10</td>
       <td>4</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>41328</th>
-      <td>2018</td>
-      <td>Centro-Oeste</td>
-      <td>DF</td>
-      <td>5300108.0</td>
-      <td>Brasília</td>
-      <td>True</td>
-      <td>71</td>
-      <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>1</td>
-      <td>32</td>
-      <td>11</td>
-      <td>5</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>41329</th>
-      <td>2018</td>
-      <td>Centro-Oeste</td>
-      <td>DF</td>
-      <td>5300108.0</td>
-      <td>Brasília</td>
-      <td>True</td>
-      <td>71</td>
-      <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>1</td>
-      <td>56</td>
-      <td>20</td>
-      <td>2</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>41330</th>
-      <td>2018</td>
-      <td>Centro-Oeste</td>
-      <td>DF</td>
-      <td>5300108.0</td>
-      <td>Brasília</td>
-      <td>True</td>
-      <td>71</td>
-      <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>1</td>
-      <td>3.0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
       <td>3</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>41331</th>
-      <td>2018</td>
+      <th>48780</th>
+      <td>2019</td>
       <td>Centro-Oeste</td>
       <td>DF</td>
       <td>5300108.0</td>
@@ -669,14 +626,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>2</td>
       <td>3.0</td>
       <td>1</td>
-      <td>17</td>
-      <td>6</td>
+      <td>10</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>48781</th>
+      <td>2019</td>
+      <td>Centro-Oeste</td>
+      <td>DF</td>
+      <td>5300108.0</td>
+      <td>Brasília</td>
+      <td>True</td>
+      <td>71</td>
+      <td>Gestão ambiental</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3.0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>48782</th>
+      <td>2019</td>
+      <td>Centro-Oeste</td>
+      <td>DF</td>
+      <td>5300108.0</td>
+      <td>Brasília</td>
+      <td>True</td>
+      <td>71</td>
+      <td>Gestão ambiental</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3.0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>48783</th>
+      <td>2019</td>
+      <td>Centro-Oeste</td>
+      <td>DF</td>
+      <td>5300108.0</td>
+      <td>Brasília</td>
+      <td>True</td>
+      <td>71</td>
+      <td>Gestão ambiental</td>
+      <td>2</td>
+      <td>2</td>
+      <td>3.0</td>
+      <td>1</td>
+      <td>28</td>
+      <td>7</td>
       <td>4</td>
       <td>0</td>
     </tr>
   </tbody>
 </table>
-<p>41270 rows × 16 columns</p>
+<p>48717 rows × 16 columns</p>
 </div>
 </div>
 </div>
@@ -829,8 +843,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>...</td>
     </tr>
     <tr>
-      <th>41265</th>
-      <td>2018</td>
+      <th>48712</th>
+      <td>2019</td>
       <td>Centro-Oeste</td>
       <td>DF</td>
       <td>5300108</td>
@@ -842,14 +856,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>2</td>
       <td>3</td>
       <td>1</td>
-      <td>25</td>
-      <td>11</td>
+      <td>10</td>
       <td>4</td>
+      <td>3</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>41266</th>
-      <td>2018</td>
+      <th>48713</th>
+      <td>2019</td>
       <td>Centro-Oeste</td>
       <td>DF</td>
       <td>5300108</td>
@@ -861,14 +875,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>2</td>
       <td>3</td>
       <td>1</td>
-      <td>32</td>
-      <td>11</td>
-      <td>5</td>
+      <td>10</td>
+      <td>2</td>
+      <td>1</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>41267</th>
-      <td>2018</td>
+      <th>48714</th>
+      <td>2019</td>
       <td>Centro-Oeste</td>
       <td>DF</td>
       <td>5300108</td>
@@ -880,14 +894,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>2</td>
       <td>3</td>
       <td>1</td>
-      <td>56</td>
-      <td>20</td>
+      <td>4</td>
+      <td>3</td>
       <td>2</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>41268</th>
-      <td>2018</td>
+      <th>48715</th>
+      <td>2019</td>
       <td>Centro-Oeste</td>
       <td>DF</td>
       <td>5300108</td>
@@ -896,17 +910,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>71</td>
       <td>Gestão ambiental</td>
       <td>2</td>
-      <td>1</td>
+      <td>2</td>
       <td>3</td>
       <td>1</td>
-      <td>1</td>
+      <td>4</td>
       <td>0</td>
-      <td>3</td>
-      <td>0</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>41269</th>
-      <td>2018</td>
+      <th>48716</th>
+      <td>2019</td>
       <td>Centro-Oeste</td>
       <td>DF</td>
       <td>5300108</td>
@@ -918,14 +932,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>2</td>
       <td>3</td>
       <td>1</td>
-      <td>17</td>
-      <td>6</td>
+      <td>28</td>
+      <td>7</td>
       <td>4</td>
       <td>0</td>
     </tr>
   </tbody>
 </table>
-<p>41270 rows × 16 columns</p>
+<p>48717 rows × 16 columns</p>
 </div>
 </div>
 </div>
