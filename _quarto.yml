@@ -16,13 +16,13 @@ website:
         contents:
           - sections/data_raw.ipynb
           - sections/data_collect.ipynb
-          - sections/data_inpect.ipynb
-      - section: "Princípios FAIR"
+      - section: "Análise dos Dados e Resultados"
         contents:
           - sections/data_dict.qmd
-          - sections/data_aux.qmd
+          # - sections/data_aux.qmd
           - sections/data_provenance.qmd
           - sections/data_fair.qmd
+          - sections/data_inspect_and_results.ipynb
       - sections/conclusion.qmd
 
 format:
@@ -31,6 +31,3 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
-
-
-
