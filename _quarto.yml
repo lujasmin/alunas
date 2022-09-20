@@ -16,8 +16,7 @@ website:
         contents:
           - sections/data_raw.ipynb
           - sections/data_collect.ipynb
-          - sections/data_inpect.qmd
-          - sections/data_clean.ipynb
+          - sections/data_inpect.ipynb
       - section: "Datasets curados e enriquecidos com metadados de proveniência"
         contents:
           - sections/data_dict.qmd

@@ -1,7 +1,0 @@
----
-title: "Análises de dados e investigações no Dataset bruto"
----
-
-Descrição de como foi feita a análise(perguntas que foram feitas para a base, possíveis pontos de limpeza, versões do python e bibliotecas)
-
-essa é a parte que viemos fazendo até agora, identificando o que nos será útil da base que escolhemos
