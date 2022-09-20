@@ -194,11 +194,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../sections/data_inpect.html" class="sidebar-item-text sidebar-link">Análises de dados e investigações no Dataset bruto</a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sections/data_clean.html" class="sidebar-item-text sidebar-link">Limpeza e ajustes nos dados</a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -313,17 +308,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> filter_dataset(dataset):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> dataset[</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    (</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      (f.area <span class="op">==</span> <span class="dv">51</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">51</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      (f.area <span class="op">==</span> <span class="dv">54</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">54</span>)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      (f.area <span class="op">==</span> <span class="dv">53</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">53</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      (f.area <span class="op">==</span> <span class="dv">61</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">61</span>)</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      (f.area <span class="op">==</span> <span class="dv">61</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">61</span>)</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      (f.area <span class="op">==</span> <span class="dv">71</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">71</span>)</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">&amp;</span> (</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      (f.ingressantes <span class="op">&gt;</span> <span class="dv">0</span>)</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="op">&amp;</span></span>
@@ -353,8 +348,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    dfs.append(df_filter)</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span>  dt.rbind(<span class="op">*</span>dfs)</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> df.sort(f.ano, f.cod_municipio, f.area, f.curso, <span class="op">-</span>f.concluintes_fem)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> df.to_pandas().dropna()</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> df.to_pandas()</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'rede_publica'</span>] <span class="op">=</span> df[<span class="st">'rede_publica'</span>].<span class="bu">map</span>({<span class="dv">1</span>: <span class="va">True</span>, <span class="dv">2</span>: <span class="va">False</span>})</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'presencial'</span>] <span class="op">=</span> df[<span class="st">'presencial'</span>].<span class="bu">map</span>({<span class="dv">1</span>: <span class="va">True</span>, <span class="dv">2</span>: <span class="va">False</span>})</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'bacharel'</span>] <span class="op">=</span> df[<span class="st">'bacharel'</span>].<span class="bu">map</span>({<span class="dv">1</span>: <span class="va">True</span>, <span class="dv">3</span>: <span class="va">False</span>})</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'frac_ingressantes'</span>] <span class="op">=</span> df[<span class="st">'ingressantes_fem'</span>] <span class="op">/</span> df[<span class="st">'ingressantes'</span>]</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'frac_concluintes'</span>] <span class="op">=</span> df[<span class="st">'concluintes_fem'</span>] <span class="op">/</span> df[<span class="st">'concluintes'</span>]</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  df.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="colunas" class="level2">
@@ -411,15 +412,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Curso a distância</li>
 </ol></li>
 </ul></li>
-<li><p>TP_NIVEL_ACADEMICO: Tipo do nível acadêmico do curso</p>
-<ul>
-<li><ol type="1">
-<li>Graduação</li>
-</ol></li>
-<li><ol start="2" type="1">
-<li>Seqüencial de Formação Específica</li>
-</ol></li>
-</ul></li>
 <li><p>QT_ING: Quantidade de ingressante no curso</p></li>
 <li><p>QT_ING_FEM: Quantidade de ingressante do sexo feminino no curso</p></li>
 <li><p>QT_CONC: Quantidade de concluinte no curso</p></li>
@@ -433,12 +425,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'CO_MUNICIPIO'</span>: <span class="st">'cod_municipio'</span>, <span class="co">#  Código do IBGE do municipio do local de oferta do curso</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_MUNICIPIO'</span>: <span class="st">'nome_municipio'</span>, <span class="co">#  Nome do Município do local de oferta do curso</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'IN_CAPITAL'</span>: <span class="st">'capital'</span>, <span class="co">#  Informa se o local de oferta do curso está localizado em capital de Estado</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'CO_CINE_AREA_ESPECIFICA'</span>: <span class="st">'area'</span>, <span class="co">#  Nome da área específica, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_CINE_ROTULO'</span>: <span class="st">'curso'</span>, <span class="co">#  Nome do curso, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_REDE'</span>: <span class="st">'rede_ensino'</span>, <span class="co">#  Rede de Ensino</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_MODALIDADE_ENSINO'</span>: <span class="st">'modalidade'</span>, <span class="co">#  Tipo da modalidade de ensino do curso</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_GRAU_ACADEMICO'</span>: <span class="st">'grau_academico'</span>, <span class="co">#  Tipo do grau acadêmico conferido ao ao aluno pela conclusão dos requisitos exigidos pelo curso</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_NIVEL_ACADEMICO'</span>: <span class="st">'nivel_academico'</span>, <span class="co">#  Tipo do nível acadêmico do curso</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'CO_CINE_AREA_ESPECIFICA'</span>: <span class="st">'cod_area'</span>, <span class="co"># Código de identificação da área específica, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_CINE_AREA_ESPECIFICA'</span>: <span class="st">'area'</span>, <span class="co">#  Nome da área específica, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_CINE_ROTULO'</span>: <span class="st">'curso'</span>, <span class="co">#  Nome do curso, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_REDE'</span>: <span class="st">'rede_publica'</span>, <span class="co">#  Rede de Ensino</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_MODALIDADE_ENSINO'</span>: <span class="st">'presencial'</span>, <span class="co">#  Tipo da modalidade de ensino do curso</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_GRAU_ACADEMICO'</span>: <span class="st">'bacharel'</span>, <span class="co">#  Tipo do grau acadêmico conferido ao ao aluno pela conclusão dos requisitos exigidos pelo curso</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">'QT_ING'</span>: <span class="st">'ingressantes'</span>, <span class="co">#  Quantidade de ingressante no curso</span></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">'QT_ING_FEM'</span>: <span class="st">'ingressantes_fem'</span>, <span class="co">#  Quantidade de ingressante do sexo feminino no curso</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">'QT_CONC'</span>: <span class="st">'concluintes'</span>, <span class="co">#  Quantidade de concluinte no curso</span></span>
@@ -450,7 +442,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>from_year <span class="op">=</span> <span class="dv">2010</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>to_year <span class="op">=</span> <span class="dv">2019</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_datasets(from_year, to_year, columns)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[<span class="bu">list</span>(columns.values())[:<span class="op">-</span><span class="dv">1</span>]]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[<span class="bu">list</span>(columns.values())[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> [<span class="st">'frac_ingressantes'</span>, <span class="st">'frac_concluintes'</span>]]</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
@@ -466,16 +458,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <th>cod_municipio</th>
       <th>nome_municipio</th>
       <th>capital</th>
+      <th>cod_area</th>
       <th>area</th>
       <th>curso</th>
-      <th>rede_ensino</th>
-      <th>modalidade</th>
-      <th>grau_academico</th>
-      <th>nivel_academico</th>
+      <th>rede_publica</th>
+      <th>presencial</th>
+      <th>bacharel</th>
       <th>ingressantes</th>
       <th>ingressantes_fem</th>
       <th>concluintes</th>
       <th>concluintes_fem</th>
+      <th>frac_ingressantes</th>
+      <th>frac_concluintes</th>
     </tr>
   </thead>
   <tbody>
@@ -488,15 +482,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Ariquemes</td>
       <td>False</td>
       <td>61</td>
+      <td>Computação e Tecnologias da Informação e Comun...</td>
       <td>Sistemas de informação</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
       <td>2</td>
       <td>0</td>
       <td>15</td>
       <td>1</td>
+      <td>0.000000</td>
+      <td>0.066667</td>
     </tr>
     <tr>
       <th>1</th>
@@ -507,15 +503,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Cacoal</td>
       <td>False</td>
       <td>51</td>
+      <td>Ciências biológicas e correlatas</td>
       <td>Biologia</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>1</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
       <td>21</td>
       <td>13</td>
       <td>6</td>
       <td>4</td>
+      <td>0.619048</td>
+      <td>0.666667</td>
     </tr>
     <tr>
       <th>2</th>
@@ -526,15 +524,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Cacoal</td>
       <td>False</td>
       <td>61</td>
+      <td>Computação e Tecnologias da Informação e Comun...</td>
       <td>Sistemas de informação</td>
-      <td>2</td>
-      <td>1</td>
-      <td>3.0</td>
-      <td>1</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
       <td>20</td>
       <td>4</td>
       <td>25</td>
       <td>5</td>
+      <td>0.200000</td>
+      <td>0.200000</td>
     </tr>
     <tr>
       <th>3</th>
@@ -545,15 +545,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Cacoal</td>
       <td>False</td>
       <td>71</td>
+      <td>Engenharia e profissões correlatas</td>
       <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>1</td>
-      <td>3.0</td>
-      <td>1</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
       <td>61</td>
       <td>26</td>
       <td>27</td>
       <td>12</td>
+      <td>0.426230</td>
+      <td>0.444444</td>
     </tr>
     <tr>
       <th>4</th>
@@ -564,18 +566,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Cacoal</td>
       <td>False</td>
       <td>71</td>
+      <td>Engenharia e profissões correlatas</td>
       <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>1</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
       <td>88</td>
       <td>48</td>
       <td>10</td>
       <td>5</td>
+      <td>0.545455</td>
+      <td>0.500000</td>
     </tr>
     <tr>
       <th>...</th>
+      <td>...</td>
+      <td>...</td>
       <td>...</td>
       <td>...</td>
       <td>...</td>
@@ -602,15 +608,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Brasília</td>
       <td>True</td>
       <td>71</td>
+      <td>Engenharia e profissões correlatas</td>
       <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>1</td>
-      <td>10</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
       <td>4</td>
       <td>3</td>
+      <td>2</td>
       <td>1</td>
+      <td>0.750000</td>
+      <td>0.500000</td>
     </tr>
     <tr>
       <th>48780</th>
@@ -621,15 +629,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Brasília</td>
       <td>True</td>
       <td>71</td>
+      <td>Engenharia e profissões correlatas</td>
       <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3.0</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>4</td>
+      <td>0</td>
       <td>1</td>
-      <td>10</td>
-      <td>2</td>
       <td>1</td>
-      <td>1</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
     </tr>
     <tr>
       <th>48781</th>
@@ -640,15 +650,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Brasília</td>
       <td>True</td>
       <td>71</td>
+      <td>Engenharia e profissões correlatas</td>
       <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>1</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>28</td>
+      <td>7</td>
       <td>4</td>
-      <td>3</td>
-      <td>2</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0.250000</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>48782</th>
@@ -658,16 +670,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>5300108.0</td>
       <td>Brasília</td>
       <td>True</td>
-      <td>71</td>
-      <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>1</td>
-      <td>4</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
+      <td>54</td>
+      <td>Matemática e estatística</td>
+      <td>Estatística</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>88</td>
+      <td>23</td>
+      <td>23</td>
+      <td>6</td>
+      <td>0.261364</td>
+      <td>0.260870</td>
     </tr>
     <tr>
       <th>48783</th>
@@ -677,20 +691,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>5300108.0</td>
       <td>Brasília</td>
       <td>True</td>
-      <td>71</td>
-      <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>1</td>
-      <td>28</td>
-      <td>7</td>
-      <td>4</td>
-      <td>0</td>
+      <td>54</td>
+      <td>Matemática e estatística</td>
+      <td>Matemática</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>11</td>
+      <td>3</td>
+      <td>9</td>
+      <td>3</td>
+      <td>0.272727</td>
+      <td>0.333333</td>
     </tr>
   </tbody>
 </table>
-<p>48717 rows × 16 columns</p>
+<p>48716 rows × 18 columns</p>
 </div>
 </div>
 </div>
@@ -699,8 +715,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df.to_csv(output_file, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.read_csv(output_file, dtype<span class="op">=</span>{<span class="st">'cod_municipio'</span>: <span class="bu">int</span>, <span class="st">'grau_academico'</span>:<span class="bu">int</span>})</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_read <span class="op">=</span> pd.read_csv(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  output_file, dtype<span class="op">=</span>{<span class="st">'cod_municipio'</span>: <span class="bu">int</span>})</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df_read</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <div>
@@ -715,16 +732,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <th>cod_municipio</th>
       <th>nome_municipio</th>
       <th>capital</th>
+      <th>cod_area</th>
       <th>area</th>
       <th>curso</th>
-      <th>rede_ensino</th>
-      <th>modalidade</th>
-      <th>grau_academico</th>
-      <th>nivel_academico</th>
+      <th>rede_publica</th>
+      <th>presencial</th>
+      <th>bacharel</th>
       <th>ingressantes</th>
       <th>ingressantes_fem</th>
       <th>concluintes</th>
       <th>concluintes_fem</th>
+      <th>frac_ingressantes</th>
+      <th>frac_concluintes</th>
     </tr>
   </thead>
   <tbody>
@@ -737,15 +756,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Ariquemes</td>
       <td>False</td>
       <td>61</td>
+      <td>Computação e Tecnologias da Informação e Comun...</td>
       <td>Sistemas de informação</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
       <td>2</td>
       <td>0</td>
       <td>15</td>
       <td>1</td>
+      <td>0.000000</td>
+      <td>0.066667</td>
     </tr>
     <tr>
       <th>1</th>
@@ -756,15 +777,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Cacoal</td>
       <td>False</td>
       <td>51</td>
+      <td>Ciências biológicas e correlatas</td>
       <td>Biologia</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
       <td>21</td>
       <td>13</td>
       <td>6</td>
       <td>4</td>
+      <td>0.619048</td>
+      <td>0.666667</td>
     </tr>
     <tr>
       <th>2</th>
@@ -775,15 +798,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Cacoal</td>
       <td>False</td>
       <td>61</td>
+      <td>Computação e Tecnologias da Informação e Comun...</td>
       <td>Sistemas de informação</td>
-      <td>2</td>
-      <td>1</td>
-      <td>3</td>
-      <td>1</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
       <td>20</td>
       <td>4</td>
       <td>25</td>
       <td>5</td>
+      <td>0.200000</td>
+      <td>0.200000</td>
     </tr>
     <tr>
       <th>3</th>
@@ -794,15 +819,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Cacoal</td>
       <td>False</td>
       <td>71</td>
+      <td>Engenharia e profissões correlatas</td>
       <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>1</td>
-      <td>3</td>
-      <td>1</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
       <td>61</td>
       <td>26</td>
       <td>27</td>
       <td>12</td>
+      <td>0.426230</td>
+      <td>0.444444</td>
     </tr>
     <tr>
       <th>4</th>
@@ -813,15 +840,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Cacoal</td>
       <td>False</td>
       <td>71</td>
+      <td>Engenharia e profissões correlatas</td>
       <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3</td>
-      <td>1</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
       <td>88</td>
       <td>48</td>
       <td>10</td>
       <td>5</td>
+      <td>0.545455</td>
+      <td>0.500000</td>
     </tr>
     <tr>
       <th>...</th>
@@ -841,6 +870,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>...</td>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>48711</th>
+      <td>2019</td>
+      <td>Centro-Oeste</td>
+      <td>DF</td>
+      <td>5300108</td>
+      <td>Brasília</td>
+      <td>True</td>
+      <td>71</td>
+      <td>Engenharia e profissões correlatas</td>
+      <td>Gestão ambiental</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0.750000</td>
+      <td>0.500000</td>
     </tr>
     <tr>
       <th>48712</th>
@@ -851,15 +903,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Brasília</td>
       <td>True</td>
       <td>71</td>
+      <td>Engenharia e profissões correlatas</td>
       <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3</td>
-      <td>1</td>
-      <td>10</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
       <td>4</td>
-      <td>3</td>
+      <td>0</td>
       <td>1</td>
+      <td>1</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
     </tr>
     <tr>
       <th>48713</th>
@@ -870,15 +924,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>Brasília</td>
       <td>True</td>
       <td>71</td>
+      <td>Engenharia e profissões correlatas</td>
       <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3</td>
-      <td>1</td>
-      <td>10</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>28</td>
+      <td>7</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0.250000</td>
+      <td>0.000000</td>
     </tr>
     <tr>
       <th>48714</th>
@@ -888,16 +944,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>5300108</td>
       <td>Brasília</td>
       <td>True</td>
-      <td>71</td>
-      <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3</td>
-      <td>1</td>
-      <td>4</td>
-      <td>3</td>
-      <td>2</td>
-      <td>1</td>
+      <td>54</td>
+      <td>Matemática e estatística</td>
+      <td>Estatística</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>88</td>
+      <td>23</td>
+      <td>23</td>
+      <td>6</td>
+      <td>0.261364</td>
+      <td>0.260870</td>
     </tr>
     <tr>
       <th>48715</th>
@@ -907,40 +965,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <td>5300108</td>
       <td>Brasília</td>
       <td>True</td>
-      <td>71</td>
-      <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
-      <td>3</td>
-      <td>1</td>
-      <td>4</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>48716</th>
-      <td>2019</td>
-      <td>Centro-Oeste</td>
-      <td>DF</td>
-      <td>5300108</td>
-      <td>Brasília</td>
+      <td>54</td>
+      <td>Matemática e estatística</td>
+      <td>Matemática</td>
       <td>True</td>
-      <td>71</td>
-      <td>Gestão ambiental</td>
-      <td>2</td>
-      <td>2</td>
+      <td>True</td>
+      <td>True</td>
+      <td>11</td>
       <td>3</td>
-      <td>1</td>
-      <td>28</td>
-      <td>7</td>
-      <td>4</td>
-      <td>0</td>
+      <td>9</td>
+      <td>3</td>
+      <td>0.272727</td>
+      <td>0.333333</td>
     </tr>
   </tbody>
 </table>
-<p>48717 rows × 16 columns</p>
+<p>48716 rows × 18 columns</p>
 </div>
+</div>
+</div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_read.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 48716 entries, 0 to 48715
+Data columns (total 18 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   ano                48716 non-null  int64  
+ 1   regiao             48716 non-null  object 
+ 2   uf                 48716 non-null  object 
+ 3   cod_municipio      48716 non-null  int64  
+ 4   nome_municipio     48716 non-null  object 
+ 5   capital            48716 non-null  bool   
+ 6   cod_area           48716 non-null  int64  
+ 7   area               48716 non-null  object 
+ 8   curso              48716 non-null  object 
+ 9   rede_publica       48716 non-null  bool   
+ 10  presencial         48716 non-null  bool   
+ 11  bacharel           48716 non-null  bool   
+ 12  ingressantes       48716 non-null  int64  
+ 13  ingressantes_fem   48716 non-null  int64  
+ 14  concluintes        48716 non-null  int64  
+ 15  concluintes_fem    48716 non-null  int64  
+ 16  frac_ingressantes  48716 non-null  float64
+ 17  frac_concluintes   48716 non-null  float64
+dtypes: bool(4), float64(2), int64(7), object(5)
+memory usage: 5.4+ MB</code></pre>
 </div>
 </div>
 
