@@ -1,0 +1,5 @@
+---
+title: "Considerações Finais"
+---
+
+como os dados foram adquiridos (decrição de atualizações na base e etc)
