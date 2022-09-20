@@ -189,16 +189,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../sections/data_collect.html" class="sidebar-item-text sidebar-link active">Coleta dos Dados</a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sections/data_inpect.html" class="sidebar-item-text sidebar-link">Análise dos Dados</a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Princípios FAIR</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Análise dos Dados e Resultados</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -211,17 +206,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../sections/data_aux.html" class="sidebar-item-text sidebar-link">Datasets complementares</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../sections/data_provenance.html" class="sidebar-item-text sidebar-link">Proveniência do dataset</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sections/data_fair.html" class="sidebar-item-text sidebar-link">Enquadramento dos princípios FAIR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sections/data_inspect_and_results.html" class="sidebar-item-text sidebar-link">Análise dos Dados</a>
   </div>
 </li>
       </ul>
@@ -281,20 +276,87 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 .datatable .int     { background: #5D9E5D; }
 .datatable .float   { background: #4040CC; }
 .datatable .str     { background: #CC4040; }
+.datatable .time    { background: #40CC40; }
 .datatable .row_index {  background: var(--jp-border-color3);  border-right: 1px solid var(--jp-border-color0);  color: var(--jp-ui-font-color3);  font-size: 9px;}
+.datatable .frame tbody td { text-align: left; }
 .datatable .frame tr.coltypes .row_index {  background: var(--jp-border-color0);}
 .datatable th:nth-child(2) { padding-left: 12px; }
 .datatable .hellipsis {  color: var(--jp-cell-editor-border-color);}
 .datatable .vellipsis {  background: var(--jp-layout-color0);  color: var(--jp-cell-editor-border-color);}
 .datatable .na {  color: var(--jp-cell-editor-border-color);  font-size: 80%;}
+.datatable .sp {  opacity: 0.25;}
 .datatable .footer { font-size: 9px; }
 .datatable .frame_dimensions {  background: var(--jp-border-color3);  border-top: 1px solid var(--jp-border-color0);  color: var(--jp-ui-font-color3);  display: inline-block;  opacity: 0.6;  padding: 1px 10px 1px 5px;}
 </style>
 </div>
 </div>
+<p>TODO: Deixar aqui apenas os dados brutos</p>
 <section id="aquisição-dos-dados-brutos" class="level1">
 <h1>Aquisição dos dados brutos</h1>
-<p>como os dados foram adquiridos (decrição de atualizações na base e etc)</p>
+<p>Primeiramente, conforme falado na seção anterior, unimos os microdados de todos os anos para ter um olhar menos fechado em um único ano.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_path_table_by_year(year):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  path_table <span class="op">=</span> <span class="st">'/'</span>.join([</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'../data/raw'</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'censo_</span><span class="sc">{year}</span><span class="st">.zip'</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Microdados do Censo da Educaç╞o Superior </span><span class="sc">{year}</span><span class="st">'</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dados'</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MICRODADOS_CADASTRO_CURSOS_</span><span class="sc">{year}</span><span class="st">.CSV'</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  ]).<span class="bu">format</span>(year <span class="op">=</span> year)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> path_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> aggregate_raw_data(from_year, to_year):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(from_year, to_year <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    path_table <span class="op">=</span> get_path_table_by_year(y)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    dataset <span class="op">=</span> dt.fread(path_table)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_raw <span class="op">=</span> aggregate_raw_data(<span class="dv">2010</span>, <span class="dv">2019</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>display(df_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div class="datatable">
+  <table class="frame">
+  <thead>
+    <tr class="colnames"><td class="row_index"></td><th>NU_ANO_CENSO</th><th>NO_REGIAO</th><th>CO_REGIAO</th><th>NO_UF</th><th>SG_UF</th><th>CO_UF</th><th>NO_MUNICIPIO</th><th>CO_MUNICIPIO</th><th>IN_CAPITAL</th><th>TP_ORGANIZACAO_ACADEMICA</th><th class="vellipsis">…</th><th>QT_CONC_ATIV_EXTRACURRICULAR</th><th>QT_MOB_ACADEMICA</th><th>QT_ING_MOB_ACADEMICA</th><th>QT_MAT_MOB_ACADEMICA</th><th>QT_CONC_MOB_ACADEMICA</th></tr>
+    <tr class="coltypes"><td class="row_index"></td><td class="int" title="int32">▪▪▪▪</td><td class="str" title="str32">▪▪▪▪</td><td class="int" title="int32">▪▪▪▪</td><td class="str" title="str32">▪▪▪▪</td><td class="str" title="str32">▪▪▪▪</td><td class="int" title="int32">▪▪▪▪</td><td class="str" title="str32">▪▪▪▪</td><td class="int" title="int32">▪▪▪▪</td><td class="bool" title="bool8">▪</td><td class="int" title="int32">▪▪▪▪</td><td></td><td class="int" title="int32">▪▪▪▪</td><td class="int" title="int32">▪▪▪▪</td><td class="int" title="int32">▪▪▪▪</td><td class="int" title="int32">▪▪▪▪</td><td class="int" title="int32">▪▪▪▪</td></tr>
+  </thead>
+  <tbody>
+    <tr><td class="row_index">0</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Água Boa</td><td>5100201</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">1</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Água Boa</td><td>5100201</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">2</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Água Boa</td><td>5100201</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">3</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Alto Araguaia</td><td>5100300</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">4</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Aripuanã</td><td>5101407</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">5</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Aripuanã</td><td>5101407</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">6</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Aripuanã</td><td>5101407</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">7</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Barra do Garças</td><td>5101803</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">8</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Barra do Garças</td><td>5101803</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>6</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">9</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Barra do Garças</td><td>5101803</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>3</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">10</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Barra do Garças</td><td>5101803</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>5</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+    <tr><td class="row_index">11</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Barra do Garças</td><td>5101803</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">12</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Barra do Garças</td><td>5101803</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>5</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">13</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Barra do Garças</td><td>5101803</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>7</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+    <tr><td class="row_index">14</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Mato Grosso</td><td>MT</td><td>51</td><td>Barra do Garças</td><td>5101803</td><td>0</td><td>1</td><td class="vellipsis">…</td><td>13</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+    <tr><td class="row_index">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋱</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td><td class="hellipsis">⋮</td></tr>
+    <tr><td class="row_index">246,076</td><td>2019</td><td>Sudeste</td><td>3</td><td>Rio de Janeiro</td><td>RJ</td><td>33</td><td>Barra Mansa</td><td>3300407</td><td>0</td><td>3</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">246,077</td><td>2019</td><td>Centro-Oeste</td><td>5</td><td>Distrito Federal</td><td>DF</td><td>53</td><td>Brasília</td><td>5300108</td><td>1</td><td>3</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">246,078</td><td>2019</td><td>Sudeste</td><td>3</td><td>São Paulo</td><td>SP</td><td>35</td><td>Sumaré</td><td>3552403</td><td>0</td><td>3</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">246,079</td><td>2019</td><td>Sudeste</td><td>3</td><td>São Paulo</td><td>SP</td><td>35</td><td>Indaiatuba</td><td>3520509</td><td>0</td><td>3</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td class="row_index">246,080</td><td>2019</td><td>Sudeste</td><td>3</td><td>São Paulo</td><td>SP</td><td>35</td><td>Matão</td><td>3529302</td><td>0</td><td>3</td><td class="vellipsis">…</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+  </tbody>
+  </table>
+  <div class="footer">
+    <div class="frame_dimensions">246,081 rows × 196 columns</div>
+  </div>
+</div>
+</div>
+</div>
+<p>Após a agregação, a tabela bruta para trabalho ficou com 246,081 linhas e 196 colunas.<br>
+Após isso, era necessário entender mais sobre as principais características e atributos da base que nos seriam interessantes.</p>
 <section id="áreas-stem" class="level2">
 <h2 class="anchored" data-anchor-id="áreas-stem">Áreas STEM</h2>
 <ul>
@@ -305,63 +367,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>71: engenharias e correlatas</p></li>
 </ul>
 <div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> filter_dataset(dataset):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> dataset[</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    (</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">51</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">54</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">53</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">61</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">61</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">71</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">&amp;</span> (</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      (f.ingressantes <span class="op">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="op">&amp;</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      (f.concluintes <span class="op">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      <span class="op">&amp;</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>      (f.concluintes_fem <span class="op">&gt;</span> <span class="dv">1</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      <span class="op">&amp;</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      (f.ingressantes <span class="op">&gt;</span> f.concluintes)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>      <span class="op">&amp;</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>      (f.ingressantes_fem <span class="op">&gt;</span> f.concluintes_fem)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    , :]</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_path_table_by_year(year):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  path_table <span class="op">=</span> <span class="st">'/'</span>.join([</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'../data/raw'</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'censo_</span><span class="sc">{year}</span><span class="st">.zip'</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Microdados do Censo da Educaç╞o Superior </span><span class="sc">{year}</span><span class="st">'</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dados'</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MICRODADOS_CADASTRO_CURSOS_</span><span class="sc">{year}</span><span class="st">.CSV'</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  ]).<span class="bu">format</span>(year <span class="op">=</span> year)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> path_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> filter_dataset(dataset):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> dataset[</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">51</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">54</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">53</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">61</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">61</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      <span class="op">|</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      (f.cod_area <span class="op">==</span> <span class="dv">71</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">&amp;</span> (</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>      (f.ingressantes <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>      <span class="op">&amp;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>      (f.concluintes <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>      <span class="op">&amp;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>      (f.concluintes_fem <span class="op">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>      <span class="op">&amp;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>      (f.ingressantes <span class="op">&gt;</span> f.concluintes)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      <span class="op">&amp;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>      (f.ingressantes_fem <span class="op">&gt;</span> f.concluintes_fem)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    , :]</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_datasets(from_year, to_year, columns):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  dfs <span class="op">=</span> <span class="bu">list</span>()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(from_year, to_year <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    path_table <span class="op">=</span> get_path_table_by_year(y)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    dataset <span class="op">=</span> dt.fread(path_table, columns<span class="op">=</span>columns)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    df_filter <span class="op">=</span> filter_dataset(dataset)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    dfs.append(df_filter)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span>  dt.rbind(<span class="op">*</span>dfs)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> df.sort(f.ano, f.cod_municipio, f.area, f.curso, <span class="op">-</span>f.concluintes_fem)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> df.to_pandas()</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'rede_publica'</span>] <span class="op">=</span> df[<span class="st">'rede_publica'</span>].<span class="bu">map</span>({<span class="dv">1</span>: <span class="va">True</span>, <span class="dv">2</span>: <span class="va">False</span>})</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'presencial'</span>] <span class="op">=</span> df[<span class="st">'presencial'</span>].<span class="bu">map</span>({<span class="dv">1</span>: <span class="va">True</span>, <span class="dv">2</span>: <span class="va">False</span>})</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'bacharel'</span>] <span class="op">=</span> df[<span class="st">'bacharel'</span>].<span class="bu">map</span>({<span class="dv">1</span>: <span class="va">True</span>, <span class="dv">3</span>: <span class="va">False</span>})</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'frac_ingressantes'</span>] <span class="op">=</span> df[<span class="st">'ingressantes_fem'</span>] <span class="op">/</span> df[<span class="st">'ingressantes'</span>]</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'frac_concluintes'</span>] <span class="op">=</span> df[<span class="st">'concluintes_fem'</span>] <span class="op">/</span> df[<span class="st">'concluintes'</span>]</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  df.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_datasets(from_year, to_year, columns):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  dfs <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(from_year, to_year <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    path_table <span class="op">=</span> get_path_table_by_year(y)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    dataset <span class="op">=</span> dt.fread(path_table, columns<span class="op">=</span>columns)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    df_filter <span class="op">=</span> filter_dataset(dataset)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    dfs.append(df_filter)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span>  dt.rbind(<span class="op">*</span>dfs)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> df.sort(f.ano, f.cod_municipio, f.area, f.curso, <span class="op">-</span>f.concluintes_fem)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  df <span class="op">=</span> df.to_pandas()</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'rede_publica'</span>] <span class="op">=</span> df[<span class="st">'rede_publica'</span>].<span class="bu">map</span>({<span class="dv">1</span>: <span class="va">True</span>, <span class="dv">2</span>: <span class="va">False</span>})</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'presencial'</span>] <span class="op">=</span> df[<span class="st">'presencial'</span>].<span class="bu">map</span>({<span class="dv">1</span>: <span class="va">True</span>, <span class="dv">2</span>: <span class="va">False</span>})</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'bacharel'</span>] <span class="op">=</span> df[<span class="st">'bacharel'</span>].<span class="bu">map</span>({<span class="dv">1</span>: <span class="va">True</span>, <span class="dv">3</span>: <span class="va">False</span>})</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'frac_ingressantes'</span>] <span class="op">=</span> df[<span class="st">'ingressantes_fem'</span>] <span class="op">/</span> df[<span class="st">'ingressantes'</span>]</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  df[<span class="st">'frac_concluintes'</span>] <span class="op">=</span> df[<span class="st">'concluintes_fem'</span>] <span class="op">/</span> df[<span class="st">'concluintes'</span>]</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  df.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="colunas" class="level2">
@@ -424,32 +475,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>QT_CONC_FEM: Quantidade de concluinte no curso do sexo feminino</p></li>
 </ul>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NU_ANO_CENSO'</span>: <span class="st">'ano'</span>, <span class="co">#  Ano do Censo</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_REGIAO'</span>: <span class="st">'regiao'</span>, <span class="co">#  Nome da região geográfica do local de oferta do curso</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'SG_UF'</span>: <span class="st">'uf'</span>, <span class="co">#  Sigla da Unidade da Federação do local de oferta do curso</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'CO_MUNICIPIO'</span>: <span class="st">'cod_municipio'</span>, <span class="co">#  Código do IBGE do municipio do local de oferta do curso</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_MUNICIPIO'</span>: <span class="st">'nome_municipio'</span>, <span class="co">#  Nome do Município do local de oferta do curso</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'IN_CAPITAL'</span>: <span class="st">'capital'</span>, <span class="co">#  Informa se o local de oferta do curso está localizado em capital de Estado</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'CO_CINE_AREA_ESPECIFICA'</span>: <span class="st">'cod_area'</span>, <span class="co"># Código de identificação da área específica, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_CINE_AREA_ESPECIFICA'</span>: <span class="st">'area'</span>, <span class="co">#  Nome da área específica, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_CINE_ROTULO'</span>: <span class="st">'curso'</span>, <span class="co">#  Nome do curso, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_REDE'</span>: <span class="st">'rede_publica'</span>, <span class="co">#  Rede de Ensino</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_MODALIDADE_ENSINO'</span>: <span class="st">'presencial'</span>, <span class="co">#  Tipo da modalidade de ensino do curso</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_GRAU_ACADEMICO'</span>: <span class="st">'bacharel'</span>, <span class="co">#  Tipo do grau acadêmico conferido ao ao aluno pela conclusão dos requisitos exigidos pelo curso</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">'QT_ING'</span>: <span class="st">'ingressantes'</span>, <span class="co">#  Quantidade de ingressante no curso</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">'QT_ING_FEM'</span>: <span class="st">'ingressantes_fem'</span>, <span class="co">#  Quantidade de ingressante do sexo feminino no curso</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">'QT_CONC'</span>: <span class="st">'concluintes'</span>, <span class="co">#  Quantidade de concluinte no curso</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">'QT_CONC_FEM'</span>: <span class="st">'concluintes_fem'</span>, <span class="co">#  Quantidade de concluinte no curso do sexo feminino</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  ...: <span class="va">None</span>,</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NU_ANO_CENSO'</span>: <span class="st">'ano'</span>, <span class="co">#  Ano do Censo</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_REGIAO'</span>: <span class="st">'regiao'</span>, <span class="co">#  Nome da região geográfica do local de oferta do curso</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'SG_UF'</span>: <span class="st">'uf'</span>, <span class="co">#  Sigla da Unidade da Federação do local de oferta do curso</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'CO_MUNICIPIO'</span>: <span class="st">'cod_municipio'</span>, <span class="co">#  Código do IBGE do municipio do local de oferta do curso</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_MUNICIPIO'</span>: <span class="st">'nome_municipio'</span>, <span class="co">#  Nome do Município do local de oferta do curso</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'IN_CAPITAL'</span>: <span class="st">'capital'</span>, <span class="co">#  Informa se o local de oferta do curso está localizado em capital de Estado</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'CO_CINE_AREA_ESPECIFICA'</span>: <span class="st">'cod_area'</span>, <span class="co"># Código de identificação da área específica, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_CINE_AREA_ESPECIFICA'</span>: <span class="st">'area'</span>, <span class="co">#  Nome da área específica, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NO_CINE_ROTULO'</span>: <span class="st">'curso'</span>, <span class="co">#  Nome do curso, conforme adaptação da Classificação Internacional Normalizada da Educação Cine/Unesco</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_REDE'</span>: <span class="st">'rede_publica'</span>, <span class="co">#  Rede de Ensino</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_MODALIDADE_ENSINO'</span>: <span class="st">'presencial'</span>, <span class="co">#  Tipo da modalidade de ensino do curso</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">'TP_GRAU_ACADEMICO'</span>: <span class="st">'bacharel'</span>, <span class="co">#  Tipo do grau acadêmico conferido ao ao aluno pela conclusão dos requisitos exigidos pelo curso</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">'QT_ING'</span>: <span class="st">'ingressantes'</span>, <span class="co">#  Quantidade de ingressante no curso</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">'QT_ING_FEM'</span>: <span class="st">'ingressantes_fem'</span>, <span class="co">#  Quantidade de ingressante do sexo feminino no curso</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">'QT_CONC'</span>: <span class="st">'concluintes'</span>, <span class="co">#  Quantidade de concluinte no curso</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">'QT_CONC_FEM'</span>: <span class="st">'concluintes_fem'</span>, <span class="co">#  Quantidade de concluinte no curso do sexo feminino</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  ...: <span class="va">None</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>from_year <span class="op">=</span> <span class="dv">2010</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>to_year <span class="op">=</span> <span class="dv">2019</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_datasets(from_year, to_year, columns)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[<span class="bu">list</span>(columns.values())[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> [<span class="st">'frac_ingressantes'</span>, <span class="st">'frac_concluintes'</span>]]</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>from_year <span class="op">=</span> <span class="dv">2010</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>to_year <span class="op">=</span> <span class="dv">2019</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> read_datasets(from_year, to_year, columns)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[<span class="bu">list</span>(columns.values())[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> [<span class="st">'frac_ingressantes'</span>, <span class="st">'frac_concluintes'</span>]]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 <div>
@@ -717,13 +768,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>output_file <span class="op">=</span> <span class="st">'../data/cursos.csv.zip'</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df.to_csv(output_file, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>output_file <span class="op">=</span> <span class="st">'../data/cursos.csv.zip'</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df.to_csv(output_file, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_read <span class="op">=</span> pd.read_csv(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  output_file, dtype<span class="op">=</span>{<span class="st">'cod_municipio'</span>: <span class="bu">int</span>})</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df_read</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_read <span class="op">=</span> pd.read_csv(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  output_file, dtype<span class="op">=</span>{<span class="st">'cod_municipio'</span>: <span class="bu">int</span>})</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df_read</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
 <div>
@@ -991,7 +1042,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_read.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_read.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 17979 entries, 0 to 17978

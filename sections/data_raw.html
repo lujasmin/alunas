@@ -121,9 +121,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -189,16 +186,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../sections/data_collect.html" class="sidebar-item-text sidebar-link">Coleta dos Dados</a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sections/data_inpect.html" class="sidebar-item-text sidebar-link">Análise dos Dados</a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Princípios FAIR</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Análise dos Dados e Resultados</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -211,17 +203,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../sections/data_aux.html" class="sidebar-item-text sidebar-link">Datasets complementares</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../sections/data_provenance.html" class="sidebar-item-text sidebar-link">Proveniência do dataset</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sections/data_fair.html" class="sidebar-item-text sidebar-link">Enquadramento dos princípios FAIR</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sections/data_inspect_and_results.html" class="sidebar-item-text sidebar-link">Análise dos Dados</a>
   </div>
 </li>
       </ul>
@@ -240,10 +232,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#baixando-da-fonte" id="toc-baixando-da-fonte" class="nav-link active" data-scroll-target="#baixando-da-fonte">Baixando da fonte</a>
-  <ul class="collapse">
-  <li><a href="#fonte" id="toc-fonte" class="nav-link" data-scroll-target="#fonte">Fonte</a></li>
-  </ul></li>
+  <li><a href="#preparando-o-ambiente" id="toc-preparando-o-ambiente" class="nav-link active" data-scroll-target="#preparando-o-ambiente">Preparando o Ambiente</a></li>
+  <li><a href="#escolha-do-dataset" id="toc-escolha-do-dataset" class="nav-link" data-scroll-target="#escolha-do-dataset">Escolha do Dataset</a></li>
   </ul>
 </nav>
     </div>
@@ -266,143 +256,146 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests, warnings</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datatable <span class="im">as</span> dt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-
-<style type="text/css">
-.datatable table.frame { margin-bottom: 0; }
-.datatable table.frame thead { border-bottom: none; }
-.datatable table.frame tr.coltypes td {  color: #FFFFFF;  line-height: 6px;  padding: 0 0.5em;}
-.datatable .bool    { background: #DDDD99; }
-.datatable .object  { background: #565656; }
-.datatable .int     { background: #5D9E5D; }
-.datatable .float   { background: #4040CC; }
-.datatable .str     { background: #CC4040; }
-.datatable .row_index {  background: var(--jp-border-color3);  border-right: 1px solid var(--jp-border-color0);  color: var(--jp-ui-font-color3);  font-size: 9px;}
-.datatable .frame tr.coltypes .row_index {  background: var(--jp-border-color0);}
-.datatable th:nth-child(2) { padding-left: 12px; }
-.datatable .hellipsis {  color: var(--jp-cell-editor-border-color);}
-.datatable .vellipsis {  background: var(--jp-layout-color0);  color: var(--jp-cell-editor-border-color);}
-.datatable .na {  color: var(--jp-cell-editor-border-color);  font-size: 80%;}
-.datatable .footer { font-size: 9px; }
-.datatable .frame_dimensions {  background: var(--jp-border-color3);  border-top: 1px solid var(--jp-border-color0);  color: var(--jp-ui-font-color3);  display: inline-block;  opacity: 0.6;  padding: 1px 10px 1px 5px;}
-</style>
+<section id="preparando-o-ambiente" class="level1">
+<h1>Preparando o Ambiente</h1>
+<p>Utilizamos a versão 3.9.12 do <em>python</em>, apresentando o nosso estudo a partir da interface jupyter<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, usando anaconda<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> como gerenciador de pacotes. As bibliotecas utilizadas e suas respectivas versões estão descritas a seguir:</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>cat ..<span class="op">/</span>requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>requests==2.28.1
+pandas==1.4.2
+datatable
+tqdm==4.64.0</code></pre>
 </div>
 </div>
-<section id="baixando-da-fonte" class="level1">
-<h1>Baixando da fonte</h1>
-<p>descrição do dataset escolhido, bem como sua sua origem</p>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_raw_data(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    url_base,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    from_year,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    to_year,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    output_dir<span class="op">=</span><span class="st">''</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  ):</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  years <span class="op">=</span> <span class="bu">range</span>(from_year, to_year <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  n_years <span class="op">=</span> to_year <span class="op">-</span> from_year <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> y <span class="kw">in</span> tqdm(years, total<span class="op">=</span>n_years):</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    fname <span class="op">=</span> <span class="ss">f'censo_</span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">.zip'</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    export <span class="op">=</span> output_dir <span class="op">+</span> fname</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> url_base.<span class="bu">format</span>(year <span class="op">=</span> y)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="cf">with</span> warnings.catch_warnings():</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        warnings.simplefilter(<span class="st">"ignore"</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> requests.get(</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>          url, verify <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="cf">with</span> <span class="bu">open</span>(export, <span class="st">'wb'</span>) <span class="im">as</span> f:</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        f.write(r.content)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="ss">f'Success to download year: </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="ss">f'Failed to download year: </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss"> from </span><span class="sc">{</span>url<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="fonte" class="level2">
-<h2 class="anchored" data-anchor-id="fonte">Fonte</h2>
-<p>Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)</p>
-<p><a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-da-educacao-superior/resultados">Censo da educação superior</a></p>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url_base <span class="op">=</span> <span class="st">'/'</span>.join([</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'https://download.inep.gov.br'</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'microdados'</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'microdados_censo_da_educacao_superior_</span><span class="sc">{year}</span><span class="st">.zip'</span>])</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>url_base</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>'https://download.inep.gov.br/microdados/microdados_censo_da_educacao_superior_{year}.zip'</code></pre>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>conda install pip</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pip install <span class="op">-</span>r ..<span class="op">/</span>requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: requests==2.28.1 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from -r ../requirements.txt (line 1)) (2.28.1)
+Requirement already satisfied: pandas==1.4.2 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from -r ../requirements.txt (line 2)) (1.4.2)
+Requirement already satisfied: datatable in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from -r ../requirements.txt (line 3)) (1.0.0)
+Requirement already satisfied: tqdm==4.64.0 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from -r ../requirements.txt (line 4)) (4.64.0)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from requests==2.28.1-&gt;-r ../requirements.txt (line 1)) (1.26.9)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from requests==2.28.1-&gt;-r ../requirements.txt (line 1)) (2021.10.8)
+Requirement already satisfied: charset-normalizer&lt;3,&gt;=2 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from requests==2.28.1-&gt;-r ../requirements.txt (line 1)) (2.0.4)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from requests==2.28.1-&gt;-r ../requirements.txt (line 1)) (3.3)
+Requirement already satisfied: python-dateutil&gt;=2.8.1 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from pandas==1.4.2-&gt;-r ../requirements.txt (line 2)) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from pandas==1.4.2-&gt;-r ../requirements.txt (line 2)) (2021.3)
+Requirement already satisfied: numpy&gt;=1.18.5 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from pandas==1.4.2-&gt;-r ../requirements.txt (line 2)) (1.21.5)
+Requirement already satisfied: six&gt;=1.5 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from python-dateutil&gt;=2.8.1-&gt;pandas==1.4.2-&gt;-r ../requirements.txt (line 2)) (1.16.0)
+Note: you may need to restart the kernel to use updated packages.</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>from_year <span class="op">=</span> <span class="dv">2010</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>to_year <span class="op">=</span> <span class="dv">2019</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="escolha-do-dataset" class="level1">
+<h1>Escolha do Dataset</h1>
+<p>Buscamos uma base de dados de procedência confiável, que possuísse também dados históricos para possibilitar uma análise temporal mais apurada e não apenas um olhar mais fechado na última amostra. As bases selecionadas foram provenientes do Censo de Educação Superior,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> fornecido pelo INEP, , usando a tabela <code>Microdados | Censo da Educação Superior</code>, disponível em <code>https://download.inep.gov.br/microdados/microdados_censo_da_educacao_superior_{year}.zip}</code>, em que o <code>year</code> corresponde ao ano alvo para cada coleta.<br>
+Levamos em consideração dados coletados no período entre 2010 e 2019 e, a partir disso, fizemos uma agregação de todas as tabelas em um único arquivo que chamamos de <code>cursos</code>.</p>
+<p>Abaixo, está o esse código de coleta dos microdados, usando uma função auxiliar para automatizar o processo.</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests, warnings</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datatable <span class="im">as</span> dt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>output_dir <span class="op">=</span> <span class="st">'../data/raw/'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_raw_data(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    url_base,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    from_year,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    to_year,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    output_dir<span class="op">=</span><span class="st">''</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  ):</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  os.makedirs(os.path.dirname(output_dir), exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  years <span class="op">=</span> <span class="bu">range</span>(from_year, to_year <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  n_years <span class="op">=</span> to_year <span class="op">-</span> from_year <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> y <span class="kw">in</span> tqdm(years, total<span class="op">=</span>n_years):</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    fname <span class="op">=</span> <span class="ss">f'censo_</span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">.zip'</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    export <span class="op">=</span> output_dir <span class="op">+</span> fname</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> url_base.<span class="bu">format</span>(year <span class="op">=</span> y)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      <span class="cf">with</span> warnings.catch_warnings():</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        warnings.simplefilter(<span class="st">"ignore"</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> requests.get(</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>          url, verify <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>      <span class="cf">with</span> <span class="bu">open</span>(export, <span class="st">'wb'</span>) <span class="im">as</span> f:</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        f.write(r.content)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="ss">f'Success to download year: </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="ss">f'Failed to download year: </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss"> from </span><span class="sc">{</span>url<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>download_raw_data(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  url_base,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  from_year,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  to_year,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  output_dir</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>url_base <span class="op">=</span> <span class="st">'/'</span>.join([</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'https://download.inep.gov.br'</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'microdados'</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'microdados_censo_da_educacao_superior_</span><span class="sc">{year}</span><span class="st">.zip'</span>])</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>from_year <span class="op">=</span> <span class="dv">2010</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>to_year <span class="op">=</span> <span class="dv">2019</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>output_dir <span class="op">=</span> <span class="st">'../data/raw/'</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>download_raw_data(</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  url_base,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  from_year,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  to_year,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  output_dir</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 10%|█         | 1/10 [00:04&lt;00:37,  4.15s/it]</code></pre>
+<pre><code> 10%|█         | 1/10 [00:03&lt;00:27,  3.10s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2010</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 20%|██        | 2/10 [00:13&lt;00:57,  7.20s/it]</code></pre>
+<pre><code> 20%|██        | 2/10 [00:12&lt;00:56,  7.02s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2011</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 30%|███       | 3/10 [00:20&lt;00:49,  7.08s/it]</code></pre>
+<pre><code> 30%|███       | 3/10 [00:18&lt;00:45,  6.51s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2012</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 40%|████      | 4/10 [00:28&lt;00:44,  7.35s/it]</code></pre>
+<pre><code> 40%|████      | 4/10 [00:25&lt;00:40,  6.75s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2013</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 50%|█████     | 5/10 [00:53&lt;01:09, 13.91s/it]</code></pre>
+<pre><code> 50%|█████     | 5/10 [00:34&lt;00:36,  7.37s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2014</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 60%|██████    | 6/10 [01:03&lt;00:50, 12.59s/it]</code></pre>
+<pre><code> 60%|██████    | 6/10 [00:39&lt;00:26,  6.69s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2015</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 70%|███████   | 7/10 [01:11&lt;00:33, 11.03s/it]</code></pre>
+<pre><code> 70%|███████   | 7/10 [00:48&lt;00:22,  7.51s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2016</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 80%|████████  | 8/10 [01:22&lt;00:22, 11.10s/it]</code></pre>
+<pre><code> 80%|████████  | 8/10 [00:59&lt;00:16,  8.43s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2017</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 90%|█████████ | 9/10 [01:33&lt;00:11, 11.11s/it]</code></pre>
+<pre><code> 90%|█████████ | 9/10 [01:06&lt;00:08,  8.04s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2018</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>100%|██████████| 10/10 [01:48&lt;00:00, 10.81s/it]</code></pre>
+<pre><code>100%|██████████| 10/10 [01:14&lt;00:00,  7.46s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2019</code></pre>
@@ -414,9 +407,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 </section>
-</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>https://jupyter.org/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>https://www.anaconda.com/<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-da-educacao-superior/resultados<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
