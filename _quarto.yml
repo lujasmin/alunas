@@ -17,7 +17,7 @@ website:
           - sections/data_raw.ipynb
           - sections/data_collect.ipynb
           - sections/data_inpect.ipynb
-      - section: "Datasets curados e enriquecidos com metadados de proveniência"
+      - section: "Princípios FAIR"
         contents:
           - sections/data_dict.qmd
           - sections/data_aux.qmd

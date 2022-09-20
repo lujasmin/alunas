@@ -2,4 +2,4 @@
 title: "Dicionário de dados"
 ---
 
-TODO.
+Datasets curados e enriquecidos com metadados de proveniência
