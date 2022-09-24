@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<prov:document xmlns:inep="https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-da-educacao-superior/resultados" xmlns:foaf="http://xmlns.com/foaf/0.1/#term_Agent" xmlns:ufrj="http://www.ufrj.br/ppgi/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <prov:entity prov:id="inep:Microdados_Censo_da_Educação_Superior"/>
+  <prov:agent prov:id="foaf:Alexandre-Lenise-Lucas-Luciane"/>
+  <prov:wasAttributedTo>
+    <prov:entity prov:ref="inep:Microdados_Censo_da_Educação_Superior"/>
+    <prov:agent prov:ref="foaf:Alexandre-Lenise-Lucas-Luciane"/>
+  </prov:wasAttributedTo>
+  <prov:activity prov:id="ufrj:Aquisição_dos_Dados"/>
+  <prov:entity prov:id="inep:Microdados_Censo_da_Educação_Superior"/>
+  <prov:agent prov:id="foaf:Alexandre-Lenise-Lucas-Luciane"/>
+  <prov:wasAttributedTo>
+    <prov:entity prov:ref="inep:Microdados_Censo_da_Educação_Superior"/>
+    <prov:agent prov:ref="foaf:Alexandre-Lenise-Lucas-Luciane"/>
+  </prov:wasAttributedTo>
+  <prov:activity prov:id="ufrj:Aquisição_dos_Dados"/>
+  <prov:activity prov:id="ufrj:Tratamento_dos_dados"/>
+  <prov:activity prov:id="ufrj:Análise_e_Investigações"/>
+  <prov:wasGeneratedBy>
+    <prov:entity prov:ref="inep:Microdados_Censo_da_Educação_Superior"/>
+    <prov:activity prov:ref="ufrj:Aquisição_dos_Dados"/>
+  </prov:wasGeneratedBy>
+  <prov:wasGeneratedBy>
+    <prov:entity prov:ref="inep:Microdados_Censo_da_Educação_Superior"/>
+    <prov:activity prov:ref="ufrj:Tratamento_dos_dados"/>
+  </prov:wasGeneratedBy>
+  <prov:wasGeneratedBy>
+    <prov:entity prov:ref="inep:Microdados_Censo_da_Educação_Superior"/>
+    <prov:activity prov:ref="ufrj:Análise_e_Investigações"/>
+  </prov:wasGeneratedBy>
+  <prov:agent prov:id="foaf:Alexandre-Lenise-Lucas-Luciane">
+    <foaf:mbox>grupo_5</foaf:mbox>
+    <prov:attributedAtTime>2022-09-24 01:04:00.249809</prov:attributedAtTime>
+    <prov:hadRole>Executor</prov:hadRole>
+  </prov:agent>
+  <prov:entity prov:id="inep:Microdados_Censo_da_Educação_Superior">
+    <prov:generatedAtTime>2022-09-24 01:04:00.250040</prov:generatedAtTime>
+  </prov:entity>
+  <prov:entity prov:id="inep:Microdados_Censo_da_Educação_Superior">
+    <prov:location xsi:type="xsd:string">https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-da-educacao-superior/resultados</prov:location>
+  </prov:entity>
+</prov:document>

@@ -1,5 +1,0 @@
----
-title: "Proveniência do dataset"
----
-
-TODO.
