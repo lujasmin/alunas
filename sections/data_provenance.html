@@ -20,6 +20,88 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -186,11 +268,161 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>TODO.</p>
+<p>A proveniência dos dados é importante para agregar metadados sobre a origem, sua obtenção e mais informações sobre os dados, o que enriquece a pesquisa científica e a identificação da autoria <span class="citation" data-cites="buneman2007provenance">(<a href="#ref-buneman2007provenance" role="doc-biblioref">Buneman and Tan 2007</a>)</span>. Para adicionar proveniência ao trabalho, utilizamos a biblioteca <code>prov</code>, que é a alternativa em Python para o modelo fornecido em <span class="citation" data-cites="missier2013w3c">(<a href="#ref-missier2013w3c" role="doc-biblioref">Missier, Belhajjame, and Cheney 2013</a>)</span>. Sua instalação é feita como na célula abaixo.</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pip install prov</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Collecting prov
+  Downloading prov-2.0.0-py3-none-any.whl (421 kB)
+     |████████████████████████████████| 421 kB 3.5 MB/s eta 0:00:01
+Requirement already satisfied: lxml&gt;=3.3.5 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from prov) (4.8.0)
+Collecting rdflib&gt;=4.2.1
+  Downloading rdflib-6.2.0-py3-none-any.whl (500 kB)
+     |████████████████████████████████| 500 kB 26.5 MB/s eta 0:00:01
+Requirement already satisfied: python-dateutil&gt;=2.2 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from prov) (2.8.2)
+Requirement already satisfied: networkx&gt;=2.0 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from prov) (2.7.1)
+Requirement already satisfied: six&gt;=1.5 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from python-dateutil&gt;=2.2-&gt;prov) (1.16.0)
+Requirement already satisfied: setuptools in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from rdflib&gt;=4.2.1-&gt;prov) (61.2.0)
+Requirement already satisfied: pyparsing in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from rdflib&gt;=4.2.1-&gt;prov) (3.0.4)
+Collecting isodate
+  Downloading isodate-0.6.1-py2.py3-none-any.whl (41 kB)
+     |████████████████████████████████| 41 kB 2.0 MB/s  eta 0:00:01
+Installing collected packages: isodate, rdflib, prov
+Successfully installed isodate-0.6.1 prov-2.0.0 rdflib-6.2.0
+Note: you may need to restart the kernel to use updated packages.</code></pre>
+</div>
+</div>
+<p>Tendo a biblioteca instalada, é possível importar o necessário. Além disso, nessa primeira etapa, é inicializado o documento de proveniência:</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prov.model <span class="im">import</span> ProvDocument</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> ProvDocument()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para obter o grafo de proveniência como resultado, é necessário definir os agentes, as entidades e atividades, tal qual descrito abaixo:</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> <span class="st">'grafo_de_proveniencia'</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>entity   <span class="op">=</span> <span class="st">'Microdados_Censo_da_Educação_Superior'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>agent    <span class="op">=</span> <span class="st">'Alexandre-Lenise-Lucas-Luciane'</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>activity_1 <span class="op">=</span> <span class="st">'Aquisição_dos_Dados'</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>activity_2 <span class="op">=</span> <span class="st">'Tratamento_dos_dados'</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>activity_3 <span class="op">=</span> <span class="st">'Análise_e_Investigações'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Tendo isso, passamos para a construção do grafo de acordo com o que foi usado na pesquisa, definindo os prefixos, adicionando agentes, entidades e atividades, configurando geradores e fazendo as devidas atribuições.</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Declaração dos namespaces para os prefixos do trabalho</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>d.add_namespace(<span class="st">'inep'</span>, <span class="st">'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-da-educacao-superior/resultados'</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>d.add_namespace(<span class="st">'foaf'</span>, <span class="st">'http://xmlns.com/foaf/0.1/#term_Agent'</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>d.add_namespace(<span class="st">'ufrj'</span>, <span class="st">'http://www.ufrj.br/ppgi/'</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Adição da entidade</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>entity <span class="op">=</span> <span class="st">"inep:"</span> <span class="op">+</span> entity</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>e1 <span class="op">=</span> d.entity(entity)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Adição do agente</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>agent <span class="op">=</span> <span class="st">"foaf:"</span> <span class="op">+</span> agent</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>d.agent(agent)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Atribuição da execução do experimento ao agente</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>d.wasAttributedTo(e1, agent)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Adição das atividades</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>activity_1 <span class="op">=</span> <span class="st">"ufrj:"</span> <span class="op">+</span> activity_1</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>d.activity(activity_1)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>activity_2 <span class="op">=</span> <span class="st">"ufrj:"</span> <span class="op">+</span> activity_2</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>d.activity(activity_2)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>activity_3 <span class="op">=</span> <span class="st">"ufrj:"</span> <span class="op">+</span> activity_3</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>d.activity(activity_3)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Configurando geradores</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>d.wasGeneratedBy( entity, activity_1)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>d.wasGeneratedBy( entity, activity_2)</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>d.wasGeneratedBy( entity, activity_3)</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Adição de papel ao agente e um timestamp</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>d.agent(agent, {<span class="st">'prov:hadRole'</span>: <span class="st">'Executor'</span>, <span class="st">'foaf:mbox'</span>: <span class="st">'grupo_5'</span>, <span class="st">'prov:attributedAtTime'</span>: <span class="bu">str</span>(datetime.datetime.utcnow())})</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>d.entity(entity, {<span class="st">'prov:generatedAtTime'</span>: <span class="bu">str</span>(datetime.datetime.utcnow())})</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>d.entity(entity, {<span class="st">'prov:location'</span>:<span class="st">'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-da-educacao-superior/resultados'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>&lt;ProvEntity: inep:Microdados_Censo_da_Educação_Superior&gt;</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pip install ipython</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: ipython in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (8.2.0)
+Requirement already satisfied: appnope in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (0.1.2)
+Requirement already satisfied: traitlets&gt;=5 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (5.1.1)
+Requirement already satisfied: setuptools&gt;=18.5 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (61.2.0)
+Requirement already satisfied: pexpect&gt;4.3 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (4.8.0)
+Requirement already satisfied: matplotlib-inline in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (0.1.2)
+Requirement already satisfied: decorator in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (5.1.1)
+Requirement already satisfied: stack-data in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (0.2.0)
+Requirement already satisfied: pickleshare in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (0.7.5)
+Requirement already satisfied: prompt-toolkit!=3.0.0,!=3.0.1,&lt;3.1.0,&gt;=2.0.0 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (3.0.20)
+Requirement already satisfied: pygments&gt;=2.4.0 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (2.11.2)
+Requirement already satisfied: jedi&gt;=0.16 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (0.18.1)
+Requirement already satisfied: backcall in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from ipython) (0.2.0)
+Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.0 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from jedi&gt;=0.16-&gt;ipython) (0.8.3)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from pexpect&gt;4.3-&gt;ipython) (0.7.0)
+Requirement already satisfied: wcwidth in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from prompt-toolkit!=3.0.0,!=3.0.1,&lt;3.1.0,&gt;=2.0.0-&gt;ipython) (0.2.5)
+Requirement already satisfied: asttokens in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from stack-data-&gt;ipython) (2.0.5)
+Requirement already satisfied: executing in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from stack-data-&gt;ipython) (0.8.3)
+Requirement already satisfied: pure-eval in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from stack-data-&gt;ipython) (0.2.2)
+Requirement already satisfied: six in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from asttokens-&gt;stack-data-&gt;ipython) (1.16.0)
+Note: you may need to restart the kernel to use updated packages.</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pip install pydot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: pydot in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (1.4.2)
+Requirement already satisfied: pyparsing&gt;=2.1.4 in /Users/lenise.rodrigues/opt/anaconda3/lib/python3.9/site-packages (from pydot) (3.0.4)
+Note: you may need to restart the kernel to use updated packages.</code></pre>
+</div>
+</div>
+<p>Para visualização gráfica e geração do output em XML, foram necessárias as instalações das bibliotecas acima, além do seguinte comando no terminal(válido para mac os):<br>
+<code>brew install gprof2dot</code><br>
+Ainda é possível essa preparação para visualização gráfica usando o seguinte, conforme disponível no <a href="https://github.com/zavaleta/Fundamentos_DS/blob/main/FCD_M1_4_Provenance.ipynb">material dos professores Sérgio Serra e Jorge Zavaleta</a>:<br>
+<code>conda install -c anaconda pydot</code><br>
+<code>conda install -c anaconda graphviz</code><br>
+Agora, com toda a preparação, é possível gerar o grafo e também um meio de visualizar.</p>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando pasta para armazenar os outputs</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>provenance_output_dir <span class="op">=</span> <span class="st">"../provenance_data/"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>os.makedirs(os.path.dirname(provenance_output_dir), exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prov.dot <span class="im">import</span> prov_to_dot</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Generação do Grafo de Proveniência</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> prov_to_dot(d)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>graph_png <span class="op">=</span> graph <span class="op">+</span> <span class="st">".png"</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>dot.write_png(provenance_output_dir <span class="op">+</span> graph_png)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Generação do Output em XML</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>output_name <span class="op">=</span> provenance_output_dir <span class="op">+</span> <span class="st">"microdados_censo_educacao_superior.xml"</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>d.serialize(output_name, <span class="bu">format</span><span class="op">=</span><span class="st">'xml'</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualização do Grafo de Proveniência</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>Image(provenance_output_dir <span class="op">+</span> graph_png)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<p><img src="data_provenance_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+</div>
+</div>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-buneman2007provenance" class="csl-entry" role="doc-biblioentry">
+Buneman, Peter, and Wang-Chiew Tan. 2007. <span>“Provenance in Databases.”</span> In <em>Proceedings of the 2007 ACM SIGMOD International Conference on Management of Data</em>, 1171–73.
+</div>
+<div id="ref-missier2013w3c" class="csl-entry" role="doc-biblioentry">
+Missier, Paolo, Khalid Belhajjame, and James Cheney. 2013. <span>“The W3C PROV Family of Specifications for Modelling Provenance Metadata.”</span> In <em>Proceedings of the 16th International Conference on Extending Database Technology</em>, 773–76.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
