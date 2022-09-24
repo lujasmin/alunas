@@ -20,7 +20,7 @@ website:
         contents:
           - sections/data_dict.qmd
           # - sections/data_aux.qmd
-          - sections/data_provenance.qmd
+          - sections/data_provenance.ipynb
           - sections/data_fair.qmd
           - sections/data_inspect_and_results.ipynb
       - sections/conclusion.qmd
