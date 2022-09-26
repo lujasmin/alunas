@@ -121,6 +121,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -184,6 +187,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sections/data_collect.html" class="sidebar-item-text sidebar-link">Coleta dos Dados</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sections/data_manipulation.html" class="sidebar-item-text sidebar-link">Tratamento dos Dados</a>
   </div>
 </li>
       </ul>
@@ -293,13 +301,37 @@ Note: you may need to restart the kernel to use updated packages.</code></pre>
 <p>Buscamos uma base de dados de procedência confiável, que possuísse também dados históricos para possibilitar uma análise temporal mais apurada e não apenas um olhar mais fechado na última amostra. As bases selecionadas foram provenientes do Censo de Educação Superior,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> fornecido pelo INEP, , usando a tabela <code>Microdados | Censo da Educação Superior</code>, disponível em <code>https://download.inep.gov.br/microdados/microdados_censo_da_educacao_superior_{year}.zip}</code>, em que o <code>year</code> corresponde ao ano alvo para cada coleta.<br>
 Levamos em consideração dados coletados no período entre 2010 e 2019 e, a partir disso, fizemos uma agregação de todas as tabelas em um único arquivo que chamamos de <code>cursos</code>.</p>
 <p>Abaixo, está o esse código de coleta dos microdados, usando uma função auxiliar para automatizar o processo.</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests, warnings</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datatable <span class="im">as</span> dt</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm <span class="im">import</span> tqdm</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<style type="text/css">
+.datatable table.frame { margin-bottom: 0; }
+.datatable table.frame thead { border-bottom: none; }
+.datatable table.frame tr.coltypes td {  color: #FFFFFF;  line-height: 6px;  padding: 0 0.5em;}
+.datatable .bool    { background: #DDDD99; }
+.datatable .object  { background: #565656; }
+.datatable .int     { background: #5D9E5D; }
+.datatable .float   { background: #4040CC; }
+.datatable .str     { background: #CC4040; }
+.datatable .time    { background: #40CC40; }
+.datatable .row_index {  background: var(--jp-border-color3);  border-right: 1px solid var(--jp-border-color0);  color: var(--jp-ui-font-color3);  font-size: 9px;}
+.datatable .frame tbody td { text-align: left; }
+.datatable .frame tr.coltypes .row_index {  background: var(--jp-border-color0);}
+.datatable th:nth-child(2) { padding-left: 12px; }
+.datatable .hellipsis {  color: var(--jp-cell-editor-border-color);}
+.datatable .vellipsis {  background: var(--jp-layout-color0);  color: var(--jp-cell-editor-border-color);}
+.datatable .na {  color: var(--jp-cell-editor-border-color);  font-size: 80%;}
+.datatable .sp {  opacity: 0.25;}
+.datatable .footer { font-size: 9px; }
+.datatable .frame_dimensions {  background: var(--jp-border-color3);  border-top: 1px solid var(--jp-border-color0);  color: var(--jp-ui-font-color3);  display: inline-block;  opacity: 0.6;  padding: 1px 10px 1px 5px;}
+</style>
 </div>
-<div class="cell" data-execution_count="16">
+</div>
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_raw_data(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    url_base,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    from_year,</span>
@@ -324,7 +356,7 @@ Levamos em consideração dados coletados no período entre 2010 e 2019 e, a par
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="ss">f'Failed to download year: </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss"> from </span><span class="sc">{</span>url<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>url_base <span class="op">=</span> <span class="st">'/'</span>.join([</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'https://download.inep.gov.br'</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'microdados'</span>,</span>
@@ -341,61 +373,61 @@ Levamos em consideração dados coletados no período entre 2010 e 2019 e, a par
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  output_dir</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 10%|█         | 1/10 [00:03&lt;00:27,  3.10s/it]</code></pre>
+<pre><code> 10%|█         | 1/10 [00:03&lt;00:28,  3.21s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2010</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 20%|██        | 2/10 [00:12&lt;00:56,  7.02s/it]</code></pre>
+<pre><code> 20%|██        | 2/10 [00:06&lt;00:26,  3.35s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2011</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 30%|███       | 3/10 [00:18&lt;00:45,  6.51s/it]</code></pre>
+<pre><code> 30%|███       | 3/10 [00:12&lt;00:31,  4.52s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2012</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 40%|████      | 4/10 [00:25&lt;00:40,  6.75s/it]</code></pre>
+<pre><code> 40%|████      | 4/10 [00:17&lt;00:27,  4.53s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2013</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 50%|█████     | 5/10 [00:34&lt;00:36,  7.37s/it]</code></pre>
+<pre><code> 50%|█████     | 5/10 [00:21&lt;00:22,  4.58s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2014</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 60%|██████    | 6/10 [00:39&lt;00:26,  6.69s/it]</code></pre>
+<pre><code> 60%|██████    | 6/10 [00:26&lt;00:18,  4.55s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2015</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 70%|███████   | 7/10 [00:48&lt;00:22,  7.51s/it]</code></pre>
+<pre><code> 70%|███████   | 7/10 [00:31&lt;00:14,  4.70s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2016</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 80%|████████  | 8/10 [00:59&lt;00:16,  8.43s/it]</code></pre>
+<pre><code> 80%|████████  | 8/10 [00:36&lt;00:09,  4.95s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2017</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> 90%|█████████ | 9/10 [01:06&lt;00:08,  8.04s/it]</code></pre>
+<pre><code> 90%|█████████ | 9/10 [00:42&lt;00:05,  5.34s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2018</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>100%|██████████| 10/10 [01:14&lt;00:00,  7.46s/it]</code></pre>
+<pre><code>100%|██████████| 10/10 [00:54&lt;00:00,  5.43s/it]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Success to download year: 2019</code></pre>
