@@ -242,6 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#seleção-dos-cursos-stem" id="toc-seleção-dos-cursos-stem" class="nav-link active" data-scroll-target="#seleção-dos-cursos-stem">Seleção dos Cursos <em>STEM</em></a></li>
   <li><a href="#renomeação-das-colunas" id="toc-renomeação-das-colunas" class="nav-link" data-scroll-target="#renomeação-das-colunas">Renomeação das colunas</a></li>
+  <li><a href="#colunas" id="toc-colunas" class="nav-link" data-scroll-target="#colunas">Colunas</a></li>
   <li><a href="#aplicando-o-tratamento" id="toc-aplicando-o-tratamento" class="nav-link" data-scroll-target="#aplicando-o-tratamento">Aplicando o tratamento</a></li>
   <li><a href="#acrescentando-as-colunas-de-latlon-dos-municípios" id="toc-acrescentando-as-colunas-de-latlon-dos-municípios" class="nav-link" data-scroll-target="#acrescentando-as-colunas-de-latlon-dos-municípios">Acrescentando as colunas de Lat&amp;Lon dos municípios</a></li>
   <li><a href="#lendo-o-arquivo-final" id="toc-lendo-o-arquivo-final" class="nav-link" data-scroll-target="#lendo-o-arquivo-final">Lendo o arquivo final</a></li>
@@ -306,7 +307,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="renomeação-das-colunas" class="level3">
 <h3 class="anchored" data-anchor-id="renomeação-das-colunas">Renomeação das colunas</h3>
-<p>Alguns nomes das colunas eram muito extensos e outros eram abreviados. Com isso, para um melhor entendimento do que se tratava cada coluna, resolvemos fazer as seguintes renomeações:</p>
+</section>
+<section id="colunas" class="level3">
+<h3 class="anchored" data-anchor-id="colunas">Colunas</h3>
+<p>Alguns nomes das colunas eram muito extensos e outros eram abreviados. Com isso, para um melhor entendimento do que se tratava cada coluna, resolvemos fazer as seguintes renomeações e filtrar as colunas que nos seriam de interesse com base no dicionário de dados.</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NU_ANO_CENSO'</span>: <span class="st">'ano'</span>,                 <span class="co">#  Ano do Censo</span></span>
