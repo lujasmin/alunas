@@ -109,14 +109,14 @@
     "href": "sections/data_inspect_and_results.html#ingressantes",
     "title": "Análise dos Dados",
     "section": "Ingressantes",
-    "text": "Ingressantes\n\ndf['frac_ingressantes'].hist(bins=5)"
+    "text": "Ingressantes\n\npx.histogram(df, x='frac_ingressantes', color='cod_area', barmode='stack')"
   },
   {
     "objectID": "sections/data_inspect_and_results.html#concluintes",
     "href": "sections/data_inspect_and_results.html#concluintes",
     "title": "Análise dos Dados",
     "section": "Concluintes",
-    "text": "Concluintes\n\ndf['frac_concluintes'].hist()"
+    "text": "Concluintes\n\npx.histogram(df, x='frac_concluintes', color='cod_area', barmode='stack')"
   },
   {
     "objectID": "sections/data_inspect_and_results.html#total",
