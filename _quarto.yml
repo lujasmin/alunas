@@ -16,6 +16,7 @@ website:
         contents:
           - sections/data_raw.ipynb
           - sections/data_collect.ipynb
+          - sections/data_manipulation.ipynb
       - section: "Análise dos Dados e Resultados"
         contents:
           - sections/data_dict.qmd
